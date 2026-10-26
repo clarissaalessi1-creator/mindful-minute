@@ -97,14 +97,17 @@ def chat(body: ChatInput):
                    (cid, "user", body.message, now()))
         history = db.execute("SELECT role, content FROM messages WHERE conversation_id=? ORDER BY id DESC LIMIT 8", (cid,)).fetchall()
         history = [dict(m) for m in reversed(history)]
-        if not os.getenv("OPENAI_API_KEY"):
+        if not (os.getenv("OPENROUTER_API_KEY") or os.getenv("OPENAI_API_KEY")):
             reply = "Live AI is not configured. You can choose the 60-second 4–6 breathing exercise without using chat."
             mode = "fallback"
         else:
             try:
                 from openai import OpenAI
-                response = OpenAI(timeout=12).chat.completions.create(
-                    model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+                use_openrouter = bool(os.getenv("OPENROUTER_API_KEY"))
+                client = OpenAI(api_key=os.getenv("OPENROUTER_API_KEY") if use_openrouter else os.getenv("OPENAI_API_KEY"),
+                                base_url="https://openrouter.ai/api/v1" if use_openrouter else "https://api.openai.com/v1", timeout=20)
+                response = client.chat.completions.create(
+                    model=os.getenv("OPENROUTER_MODEL", "openrouter/free") if use_openrouter else os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
                     messages=[{"role": "system", "content":
                         "You are an optional interface assistant for a fictional coursework prototype. "
                         "Keep replies under 55 words, calm and neutral. Do not diagnose, provide therapy, "
