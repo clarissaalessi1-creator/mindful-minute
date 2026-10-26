@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import logging
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
@@ -123,7 +124,8 @@ def chat(body: ChatInput):
                     mode = "error"
                 else:
                     mode = "live"
-            except Exception:
+            except Exception as exc:
+                logging.getLogger("uvicorn.error").error("AI provider error type: %s; status: %s", type(exc).__name__, getattr(exc, "status_code", "unknown"))
                 reply = "The AI chat is unavailable. The breathing exercise and Crisis Support button still work."
                 mode = "error"
         db.execute("INSERT INTO messages(conversation_id, role, content, created_at) VALUES (?,?,?,?)",
