@@ -12,7 +12,7 @@ This log summarizes selected development prompts, resulting changes, observation
 | Build: “Add the remaining Part 2 files directly to GitHub.” | ChatGPT created `frontend/src/App.vue`, `frontend/vite.config.js`, `backend/.gitignore`, and replaced `backend/main.py`; updated backend requirements. | GitHub tool returned commit identifiers; source exists in repository. These commits do not themselves prove runtime behavior. |
 | Browser run: “Start backend and frontend in Codespaces.” | Ran development servers in the user's browser environment. | Screenshot showed Mindful Minute home page with Start Breathing, Session History, Optional AI Chat, and Crisis Support controls. |
 | Functional check: “Test Start, Pause/Resume, Exit, History.” | User performed manual browser interactions. | User reported all tested interactions worked, including session history. Precise timing, database inspection, restart persistence, and failure simulation remain unverified. |
-| Model check: “Send a fictional exam-related message in Optional AI Chat.” | Observed deterministic fallback; confirmed no `OPENAI_API_KEY` configured in Codespaces. | Screenshot showed “Live AI is not configured” and a fallback response. **Do not label this a live-model result.** |
+| Backend/API outage test: “Stop Uvicorn, send a fictional chat message, and open Crisis Support.” | User stopped the FastAPI backend, submitted a fictional exam-stress message, opened the independent Crisis Support view, and restarted the backend. | User screenshot confirms the message “Chat unavailable. Breathing and Crisis Support remain accessible.” User subsequently reported that Crisis Support opened and the backend restarted. This tests an API outage, **not** a failed live-model request. |\n| Model check: “Send a fictional exam-related message in Optional AI Chat.” | Observed deterministic fallback; confirmed no `OPENAI_API_KEY` configured in Codespaces. | Screenshot showed “Live AI is not configured” and a fallback response. **Do not label this a live-model result.** |
 | Disclosure: “Include AI-USE.md and curated redacted evidence.” | Added this log and a disclosure file, distinguishing observed behavior from pending tests. | Documentation only; outstanding verification remains below. |
 
 ## Outstanding evidence before claiming completion
@@ -21,7 +21,7 @@ This log summarizes selected development prompts, resulting changes, observation
 - [ ] Measure one uninterrupted 60-second run with a clock; record actual wall-clock time and confirm it stays within the 90-second cap.
 - [ ] Confirm Crisis Support is accessible during the exercise and while the backend/model is unavailable; check whether the exercise keeps timing while the support view is open and fix if needed.
 - [ ] Inspect the SQLite `sessions`, `conversations`, and `messages` tables and confirm records persist after restart.
-- [ ] Test and document a simulated chat/API failure without compromising core exercise and safety access.
+- [x] Test and document a simulated chat/API failure: chat error fallback observed in screenshot; user confirmed Crisis Support opened while backend was stopped and reported restarting backend.
 - [ ] Connect and test an actual model if required; document model identifier, prompt category, response summary, and result without storing sensitive text or credentials.
 - [ ] Review whether all course rubric requirements are satisfied, then record actual test outcomes and screenshot filenames here.
 
