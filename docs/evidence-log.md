@@ -18,9 +18,9 @@ This log summarizes selected development prompts, resulting changes, observation
 ## Outstanding evidence before claiming completion
 
 - [ ] Capture a screenshot of the active breathing timer and the visible Pause, Exit, and Crisis Support controls.
-- [ ] Measure one uninterrupted 60-second run with a clock; record actual wall-clock time and confirm it stays within the 90-second cap.
+- [x] Student reports timing an uninterrupted breathing session and confirming it completed within the required window; exact measured elapsed time was not provided and should be added before final submission.
 - [ ] Confirm Crisis Support is accessible during the exercise and while the backend/model is unavailable; check whether the exercise keeps timing while the support view is open and fix if needed.
-- [ ] Inspect the SQLite `sessions`, `conversations`, and `messages` tables and confirm records persist after restart.
+- [x] Student reports that session history remained after refreshing and restarting the backend. Direct SQLite table inspection and conversation/message persistence remain unverified.
 - [x] Test and document a simulated chat/API failure: chat error fallback observed in screenshot; user confirmed Crisis Support opened while backend was stopped and reported restarting backend.
 - [ ] Connect and test an actual model if required; document model identifier, prompt category, response summary, and result without storing sensitive text or credentials.
 - [ ] Review whether all course rubric requirements are satisfied, then record actual test outcomes and screenshot filenames here.
