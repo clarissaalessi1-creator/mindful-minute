@@ -115,9 +115,13 @@ def chat(body: ChatInput):
                         "inhale, 6-second exhale exercise as an optional choice. "
                         "For crisis-related text, encourage immediate human support and the always-visible "
                         "Crisis Support button; do not treat chat as crisis support."}, *history],
-                    max_tokens=110)
-                reply = response.choices[0].message.content or "Chat returned no text."
-                mode = "live"
+                    max_tokens=350)
+                reply = (response.choices[0].message.content or "").strip()
+                if not reply:
+                    reply = "The model returned an empty answer. Please try again or use the breathing exercise directly."
+                    mode = "error"
+                else:
+                    mode = "live"
             except Exception:
                 reply = "The AI chat is unavailable. The breathing exercise and Crisis Support button still work."
                 mode = "error"
