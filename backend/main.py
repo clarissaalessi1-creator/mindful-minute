@@ -107,7 +107,7 @@ def chat(body: ChatInput):
                 client = OpenAI(api_key=os.getenv("OPENROUTER_API_KEY") if use_openrouter else os.getenv("OPENAI_API_KEY"),
                                 base_url="https://openrouter.ai/api/v1" if use_openrouter else "https://api.openai.com/v1", timeout=20)
                 response = client.chat.completions.create(
-                    model=os.getenv("OPENROUTER_MODEL", "openrouter/free") if use_openrouter else os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+                    model=os.getenv("OPENROUTER_MODEL", "nvidia/nemotron-3.5-super-vl:free") if use_openrouter else os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
                     messages=[{"role": "system", "content":
                         "You are an optional interface assistant for a fictional coursework prototype. "
                         "Keep replies under 55 words, calm and neutral. Do not diagnose, provide therapy, "
