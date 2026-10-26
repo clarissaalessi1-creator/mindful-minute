@@ -115,7 +115,8 @@ def chat(body: ChatInput):
                         "inhale, 6-second exhale exercise as an optional choice. "
                         "For crisis-related text, encourage immediate human support and the always-visible "
                         "Crisis Support button; do not treat chat as crisis support."}, *history],
-                    max_tokens=350)
+                    max_tokens=900,
+                    extra_body={"reasoning": {"effort": "none"}} if use_openrouter else {})
                 reply = (response.choices[0].message.content or "").strip()
                 if not reply:
                     reply = "The model returned an empty answer. Please try again or use the breathing exercise directly."
