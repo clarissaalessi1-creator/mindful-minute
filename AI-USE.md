@@ -8,13 +8,13 @@
 | --- | --- | --- |
 | OpenAI ChatGPT | GPT-6 (assistant identified in this project conversation; exact service build not available) | Helped plan Part 1, explain GitHub/Codespaces steps, generate and commit Part 2 Vue, FastAPI, and SQLite implementation, and draft documentation and testing guidance. |
 | GitHub and GitHub Codespaces | GitHub repository `clarissaalessi1-creator/mindful-minute`; Codespaces version not recorded | Code hosting, edits, browser-based runtime, and user-observed tests; these are development tools, not AI models. |
-| Optional OpenAI API integration | `gpt-4o-mini` is the configured default model identifier in backend source; OpenAI Python SDK dependency currently unpinned | Application code supports model-generated optional chat when an API key is configured. **No live model call has been verified.** The observed response was a deterministic fallback because `OPENAI_API_KEY` was absent. |
+| OpenRouter API integration | NVIDIA Nemotron 3.5 Super VL (free), tested October 26, 2026 | Live optional chatbot response successfully explained the 4-second inhale and 6-second exhale. Earlier tests produced empty or unavailable responses before troubleshooting. |
 
 **Other AI assistance:** No additional AI tool/model has been confirmed for this repository. Update this document if GitHub Copilot, Gemini, another model, or another tool is actually used. A visible Copilot interface alone is not evidence of use.
 
 ## What AI produced and what the student reviewed
 
-ChatGPT generated application scaffolding and source code for the paced-breathing interface, backend endpoints, database tables, optional chat integration, and safety-information view. The student reviewed the GitHub file structure, corrected a nested `backend/backend` directory and renamed `main.py Copy` to `main.py`, ran the application in Codespaces, and reported successful breathing, pause/resume, exit, and history interactions. Screenshots provided in the working conversation showed the running home page and the chat fallback. These observations do not establish full coverage or clinical effectiveness.
+ChatGPT generated application scaffolding and source code for the paced-breathing interface, backend endpoints, database tables, optional chat integration, and safety-information view. The student reviewed the GitHub file structure, corrected a nested `backend/backend` directory and renamed `main.py Copy` to `main.py`, ran the application in Codespaces, and reported successful breathing, pause/resume, exit, and history interactions. Screenshots provided in the working conversation showed the running home page, chat fallback, and a successful live AI response. These observations do not establish full coverage or clinical effectiveness.
 
 ## Limits, security, and academic integrity
 
@@ -22,7 +22,7 @@ ChatGPT generated application scaffolding and source code for the paced-breathin
 - Chat prompts and tests use fictional scenarios. The app is a coursework prototype, not therapy or an emergency service.
 - ChatGPT-generated code and guidance must be reviewed, tested, and revised by the student; no claim of full correctness is made.
 - The AI model does not control exercise timing, persistence, or the crisis-support route.
-- The optional chat's current fallback is **not** a live AI-model demonstration. If a live model is later connected, record its actual model identifier, test, result, and date here.
+- The no-key fallback is **not** a live AI demonstration. A successful live OpenRouter response was observed on October 26, 2026; availability of free models may change.
 - This is a curated disclosure, not a full conversation export.
 
 See [docs/evidence-log.md](docs/evidence-log.md) for selected redacted evidence and outstanding verification.
