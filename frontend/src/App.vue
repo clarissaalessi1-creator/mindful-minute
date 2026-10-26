@@ -72,8 +72,8 @@ async function sendChat() {
     messages.value.push({ role: 'assistant', content: 'Chat unavailable. Breathing and Crisis Support remain accessible.' })
   } finally { chatBusy.value = false }
 }
-function openCrisis() { screen.value = 'crisis' }
-function back() { screen.value = 'home' }
+function openCrisis() { if (screen.value === 'exercise') clearTimer(); screen.value = 'crisis' }
+function back() { if (sessionId.value !== null && screen.value === 'crisis' && seconds.value < 60) { screen.value = 'exercise'; return } screen.value = 'home' }
 onUnmounted(clearTimer)
 </script>
 
@@ -90,7 +90,7 @@ onUnmounted(clearTimer)
     </section>
     <section v-else-if="screen === 'exercise'" class="panel center">
       <h2>{{ running ? phase : 'Paused' }}</h2>
-      <div class="orb" :class="{ expand: running && phase === 'Breathe in', still: reducedMotion || !running }" aria-hidden="true"></div>
+      <div class="orb" :class="{ expand: !reducedMotion && running && phase === 'Breathe in', still: reducedMotion || !running }" aria-hidden="true"></div>
       <p v-if="running">Change in {{ phaseRemaining }} seconds</p>
       <p class="timer">{{ seconds }} / 60 seconds</p>
       <label><input type="checkbox" v-model="reducedMotion" /> Reduce motion</label>
