@@ -7,8 +7,8 @@ A coursework prototype offering a fixed, optional 60-second paced-breathing exer
 - Vue 3 / Vite interface with Start, Pause, Resume, Exit, and low-motion checkbox.
 - Static Crisis Support view with US 988 and emergency information, independent of AI.
 - FastAPI session and chat endpoints, backed by SQLite.
-- Optional OpenAI model call using `OPENAI_API_KEY`; without it, chat returns an explicitly labeled fallback. **Live AI is not yet configured or verified.**
-- The student reported successful browser tests of breathing controls and session history. Formal persistence, failure-mode, and end-to-end timing tests are pending.
+- Optional AI chat supports OpenRouter using `OPENROUTER_API_KEY` and an OpenAI-compatible client. A live NVIDIA Nemotron 3.5 Super VL (free) response was observed on October 26, 2026. An OpenAI API alternative may also be configured.
+- The student reported successful browser tests of breathing controls, session history after refresh/restart, and simulated backend-outage fallback. Direct SQLite inspection and exact elapsed timing remain unverified.
 
 ## Run in Codespaces
 
@@ -30,7 +30,7 @@ npm run dev
 
 Open forwarded port 5173. The frontend proxies `/api` to port 8000.
 
-Never commit API keys. If a live model is needed, configure `OPENAI_API_KEY` through a secure Codespaces secret or environment setting and verify the actual response. Do not expose port 8000 or 5173 publicly with sensitive data.
+Never commit API keys. To enable live OpenRouter chat, configure `OPENROUTER_API_KEY` securely in Codespaces before starting the backend. Do not put the key in source files. Do not expose port 8000 or 5173 publicly with sensitive data.
 
 ## Submission and disclosure
 
